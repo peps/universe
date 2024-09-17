@@ -26,7 +26,7 @@ interface DownloadReferralModalProps {
 }
 
 export default function DownloadReferralModal({ referralCode, onClose }: DownloadReferralModalProps) {
-    const [copied, setCopied] = useState(true);
+    const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {
         setCopied(true);
@@ -87,6 +87,7 @@ export default function DownloadReferralModal({ referralCode, onClose }: Downloa
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                     key="copy"
+                                    className="copytext"
                                 >
                                     Copy
                                 </CopyText>

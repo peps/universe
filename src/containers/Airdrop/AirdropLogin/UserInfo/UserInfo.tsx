@@ -27,7 +27,7 @@ import DownloadReferralModal from './DownloadReferralModal/DownloadReferralModal
 export default function UserInfo() {
     const { logout, userDetails, airdropTokens } = useAirdropStore();
     const [open, setOpen] = useState(false);
-    const [referalOpen, setReferalOpen] = useState(true);
+    const [referalOpen, setReferalOpen] = useState(false);
 
     const { t } = useTranslation(['airdrop'], { useSuspense: false });
 
@@ -108,6 +108,7 @@ export default function UserInfo() {
                     <AnimatePresence>
                         {open && (
                             <Menu>
+                                <MenuItem onClick={handleReferral}>{t('referral')}</MenuItem>
                                 <MenuItem onClick={handleLogout}>{t('logout')}</MenuItem>
                             </Menu>
                         )}

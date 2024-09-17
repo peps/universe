@@ -140,19 +140,19 @@ export const CopyButton = styled('button')`
     cursor: pointer;
     position: relative;
 
-    span {
+    .copytext {
         display: inline-block;
         transition: transform 0.2s;
     }
 
     &:hover {
-        span {
+        .copytext {
             transform: scale(1.1);
         }
     }
 `;
 
-export const CopyText = styled(motion.div)``;
+export const CopyText = styled(motion.span)``;
 
 const float = keyframes`
   0% {

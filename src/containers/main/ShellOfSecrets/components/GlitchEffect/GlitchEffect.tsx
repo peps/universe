@@ -3,10 +3,9 @@ import { Layer, Wrapper } from './styles';
 
 interface Props {
     children: React.ReactNode;
-    style?: string;
 }
 
-const GlitchEffect = ({ children, style }: Props) => {
+const GlitchEffect = ({ children }: Props) => {
     const [offset1, setOffset1] = useState(0);
     const [offset2, setOffset2] = useState(0);
     const [opacity, setOpacity] = useState(1);
@@ -30,7 +29,7 @@ const GlitchEffect = ({ children, style }: Props) => {
     }, []);
 
     return (
-        <Wrapper $customStyles={style}>
+        <Wrapper>
             <Layer>{children}</Layer>
             <Layer $isColorChannel $offset={offset1} $glitchOpacity={opacity}>
                 {children}

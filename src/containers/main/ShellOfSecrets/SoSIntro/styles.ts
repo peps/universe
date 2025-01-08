@@ -48,7 +48,7 @@ export const BoxWrapper = styled(m.div)`
     z-index: 1;
 `;
 
-export const ContentWrapper = styled('div')`
+export const InsideWrapper = styled('div')`
     width: 100%;
     position: relative;
 
@@ -58,16 +58,19 @@ export const ContentWrapper = styled('div')`
 
     gap: 20px;
 
-    padding: 58px 30px 30px 30px;
+    padding: 30px;
+    padding-top: 40px;
 
     border-radius: 15px;
     overflow: hidden;
 `;
 
-export const SoonImageWrapper = styled('div')`
+export const SoonImageWrapper = styled(m.div)`
     width: 100%;
     max-width: 282px;
-    position: relative;
+    position: absolute;
+
+    transform-origin: center center;
 `;
 
 export const SoonImg = styled('img')`
@@ -84,19 +87,13 @@ export const SoonImgBlur = styled('img')`
     top: 0;
 `;
 
-export const SoonImgPlaceholder = styled('img')`
-    width: 100%;
-    z-index: 0;
-    opacity: 0;
-`;
-
 export const JewelImage = styled('img')`
     position: absolute;
     left: 50%;
     bottom: 100%;
     transform: translateX(-50%);
     z-index: 3;
-    margin-bottom: -10px;
+    margin-bottom: -25px;
 `;
 
 export const GateImage = styled('img')`
@@ -106,4 +103,69 @@ export const GateImage = styled('img')`
     transform: translateX(-50%) rotate(90deg);
     z-index: 2;
     margin-bottom: -77px;
+`;
+
+export const ContentWrapper = styled(m.div)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+`;
+
+export const TextWrapper = styled('div')`
+    display: flex;
+    flex-direction: column;
+    padding-left: 98px;
+`;
+
+export const Title = styled('div')`
+    color: #e6ff47;
+    font-family: 'IBM Plex Mono', sans-serif;
+    font-size: 33px;
+    font-weight: 700;
+    line-height: 129.623%;
+    text-transform: uppercase;
+`;
+
+export const Text = styled('div')`
+    color: #e6ff47;
+    font-family: 'IBM Plex Mono', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 129.623%;
+`;
+
+export const ButtonWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+`;
+
+export const Button = styled('button')`
+    background: #e6ff47;
+    width: 100%;
+    height: 47px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', sans-serif;
+
+    span {
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+
+    &:hover {
+        span {
+            transform: scale(1.05);
+        }
+    }
 `;

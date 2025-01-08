@@ -2,24 +2,6 @@ import { AnimatePresence } from 'framer-motion';
 import { Wrapper } from './styles';
 import { useEffect, useState } from 'react';
 
-const variants = {
-    hidden: {
-        opacity: 0,
-        scaleY: 0,
-        scaleX: 0.8,
-    },
-    visible: {
-        opacity: 1,
-        scaleY: 1,
-        scaleX: 1,
-    },
-    exit: {
-        opacity: 0,
-        scaleY: 0,
-        scaleX: 0.8,
-    },
-};
-
 interface Props {
     children: React.ReactNode;
 }
@@ -30,7 +12,7 @@ const CRTEffect = ({ children }: Props) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(true);
-        }, 1000);
+        }, 320);
 
         return () => clearTimeout(timer);
     }, []);
@@ -38,7 +20,11 @@ const CRTEffect = ({ children }: Props) => {
     return (
         <AnimatePresence mode="wait">
             {isVisible && (
-                <Wrapper initial="hidden" animate="visible" exit="exit" variants={variants}>
+                <Wrapper
+                    initial={{ opacity: 0, scaleY: 0, scaleX: 0.8 }}
+                    animate={{ opacity: 1, scaleY: 1, scaleX: 1 }}
+                    exit={{ opacity: 0, scaleY: 0, scaleX: 0.8 }}
+                >
                     {children}
                 </Wrapper>
             )}

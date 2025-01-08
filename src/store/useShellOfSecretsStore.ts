@@ -31,6 +31,7 @@ interface WsConnectionState {
 interface State {
     referrals?: ReferralsResponse;
     showWidget: boolean;
+    showIntro: boolean;
     totalBonusTimeMs: number;
     revealDate: Date;
     wsConnectionState: WsConnectionState;
@@ -39,6 +40,7 @@ interface State {
 interface Actions {
     setReferrals: (referrals: ReferralsResponse) => void;
     setShowWidget: (showWidget: boolean) => void;
+    setShowIntro: (showIntro: boolean) => void;
     setTotalBonusTimeMs: (totalTimeBonusUpdate: number) => void;
     registerWsConnectionEvent: (event: WsConnectionEvent) => void;
     getTimeRemaining: () => { days: number; hours: number; totalRemainingMs: number };
@@ -47,6 +49,7 @@ interface Actions {
 const initialState: State = {
     referrals: undefined,
     showWidget: false,
+    showIntro: false,
     totalBonusTimeMs: 0,
     revealDate: SOS_GAME_ENDING_DATE,
     wsConnectionState: {
@@ -58,6 +61,7 @@ export const useShellOfSecretsStore = create<State & Actions>()((set, get) => ({
     ...initialState,
     setReferrals: (referrals) => set({ referrals }),
     setShowWidget: (showWidget) => set({ showWidget }),
+    setShowIntro: (showIntro) => set({ showIntro }),
     setTotalBonusTimeMs: (totalTimeBonusUpdate: number) => set({ totalBonusTimeMs: totalTimeBonusUpdate }),
     registerWsConnectionEvent: (event: WsConnectionEvent) =>
         set(({ wsConnectionState }) => {

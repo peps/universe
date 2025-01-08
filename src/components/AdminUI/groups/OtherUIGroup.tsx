@@ -7,7 +7,7 @@ import { useAirdropStore } from '@app/store/useAirdropStore.ts';
 export function OtherUIGroup() {
     const setAdminShow = useUIStore((s) => s.setAdminShow); // prevent messing up the actual setup progress value
     const adminShow = useUIStore((s) => s.adminShow);
-    const { showWidget, setShowWidget } = useShellOfSecretsStore();
+    const { showWidget, setShowWidget, showIntro, setShowIntro } = useShellOfSecretsStore();
     const setFlare = useAirdropStore((s) => s.setFlareAnimationType);
     return (
         <>
@@ -18,6 +18,9 @@ export function OtherUIGroup() {
                 </Button>
                 <Button onClick={() => setShowWidget(!showWidget)} $isActive={showWidget}>
                     SoS Widget
+                </Button>
+                <Button onClick={() => setShowIntro(!showIntro)} $isActive={showIntro}>
+                    SoS Intro
                 </Button>
                 <Button
                     onClick={() => setAdminShow(adminShow === 'orphanChainWarning' ? null : 'orphanChainWarning')}

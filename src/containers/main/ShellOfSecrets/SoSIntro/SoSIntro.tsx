@@ -59,12 +59,7 @@ export default function SoSIntro() {
 
                 <InsideWrapper>
                     <SoonImageWrapper
-                        initial={{ width: '100%', maxWidth: '282px', left: '50%', transform: 'translateX(-50%)' }}
-                        animate={
-                            showContent
-                                ? { width: '50%', maxWidth: '76px', left: '30px', transform: 'translateX(0)' }
-                                : {}
-                        }
+                        animate={showContent ? { maxWidth: '76px', left: '30px', transform: 'translateX(0)' } : {}}
                     >
                         <CRTEffect>
                             <GlitchEffect>

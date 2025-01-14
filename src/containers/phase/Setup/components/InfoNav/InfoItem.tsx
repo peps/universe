@@ -33,7 +33,7 @@ const child: Variants = {
     },
 };
 
-function AnimatedLetters({ text }: { text: string }) {
+export function AnimatedLetters({ text }: { text: string }) {
     const txtArr = Array.from(text);
 
     return (

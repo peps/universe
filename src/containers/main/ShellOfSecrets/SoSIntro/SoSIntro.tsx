@@ -28,6 +28,7 @@ import jewelImage from '../SoSWidget/images/jewel.png';
 import gateImage from '../SoSWidget/images/gate.png';
 import soooonnnnxcv1 from './images/soooonnnnxcv1.png';
 import DotsSvg from './svgs/DotsSvg';
+import { AnimatedLetters } from '@app/containers/phase/Setup/components/InfoNav/InfoItem';
 
 const CONTENT_DELAY = 3500;
 
@@ -74,19 +75,19 @@ export default function SoSIntro() {
                         animate={showContent ? { opacity: 1 } : {}}
                         exit={{ opacity: 0 }}
                     >
-                        <TextWrapper>
-                            <Title>HEY ANON!</Title>
-                            <Text>
-                                <p>This is the Shell of Secrets, the $1M global scavenger hunt! </p>
-
-                                <p>
-                                    My name is Soon, and I’m stranded in the year 2032. I can’t explain everything right
-                                    now, but I need your help to bring me back to the present. The first person to
-                                    rescue me and uncover my secret location will win a $1M prize. No tricks, no
-                                    gimmicks—this is real. Are you ready to change history?
-                                </p>
-                            </Text>
-                        </TextWrapper>
+                        {showContent && (
+                            <TextWrapper>
+                                <Title>
+                                    <AnimatedLetters text={`HEY ANON!`} />
+                                </Title>
+                                <Text>
+                                    <AnimatedLetters
+                                        text={`This is the Shell of Secrets, the $1M global scavenger hunt!
+                                        My name is Soon, and I’m stranded in the year 2032. I can’t explain everything right now, but I need your help to bring me back to the present. The first person to rescue me and uncover my secret location will win a $1M prize. No tricks, no gimmicks—this is real. Are you ready to change history?`}
+                                    />
+                                </Text>
+                            </TextWrapper>
+                        )}
 
                         <ButtonWrapper>
                             <DotsSvg

@@ -109,9 +109,11 @@ export const ContentWrapper = styled(m.div)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
     position: relative;
     z-index: 2;
+    min-height: 318px;
 `;
 
 export const TextWrapper = styled('div')`
@@ -127,6 +129,7 @@ export const Title = styled('div')`
     font-weight: 700;
     line-height: 129.623%;
     text-transform: uppercase;
+    margin-bottom: 8px;
 `;
 
 export const Text = styled('div')`

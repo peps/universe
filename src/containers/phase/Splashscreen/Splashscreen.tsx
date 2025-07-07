@@ -9,7 +9,12 @@ export default function Splashscreen() {
     const theme = useTheme();
     const url = theme.mode === 'dark' ? dm_url : default_url;
     return (
-        <SplashScreenContainer>
+        <SplashScreenContainer
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.2 }}
+            transition={{ duration: 0.5 }}
+        >
             <LottieWrapper>
                 <DotLottieReact src={url} autoplay />
             </LottieWrapper>

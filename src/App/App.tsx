@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo } from 'react';
+import { lazy, Suspense, useMemo, useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LazyMotion, domAnimation, AnimatePresence } from 'motion/react';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -27,18 +27,6 @@ interface CurrentAppSectionProps {
 
 function CurrentAppSection({ showSplashscreen, isShuttingDown }: CurrentAppSectionProps) {
     const currentSection = useMemo(() => {
-        const showMainView = !isShuttingDown && !showSplashscreen;
-
-        if (showMainView) {
-            return (
-                <AppContentContainer key="main" initial="hidden">
-                    <Suspense fallback={<div />}>
-                        <MainView />
-                    </Suspense>
-                </AppContentContainer>
-            );
-        }
-
         if (isShuttingDown) {
             return (
                 <AppContentContainer key="shutdown" initial="hidden">
@@ -48,12 +36,16 @@ function CurrentAppSection({ showSplashscreen, isShuttingDown }: CurrentAppSecti
                 </AppContentContainer>
             );
         }
+
         return (
-            <AppContentContainer key="splashscreen" initial="visible">
-                <Splashscreen />
+            <AppContentContainer key="main" initial="hidden">
+                <AnimatePresence>{showSplashscreen && <Splashscreen />}</AnimatePresence>
+                <Suspense fallback={<div />}>
+                    <MainView />
+                </Suspense>
             </AppContentContainer>
         );
-    }, [showSplashscreen, isShuttingDown]);
+    }, [isShuttingDown, showSplashscreen]);
 
     return <AnimatePresence mode="wait">{currentSection}</AnimatePresence>;
 }
@@ -62,6 +54,19 @@ export default function App() {
     const { t } = useTranslation('common');
     const showSplashscreen = useUIStore((s) => s.showSplashscreen);
     const isShuttingDown = useShuttingDown();
+    const [delayedSplash, setDelayedSplash] = useState(showSplashscreen);
+    const prevShowSplashscreen = useRef(showSplashscreen);
+
+    useEffect(() => {
+        if (prevShowSplashscreen.current && !showSplashscreen && !isShuttingDown) {
+            const timeout = setTimeout(() => setDelayedSplash(false), 2000);
+            return () => clearTimeout(timeout);
+        } else {
+            setDelayedSplash(showSplashscreen);
+        }
+        prevShowSplashscreen.current = showSplashscreen;
+    }, [showSplashscreen, isShuttingDown]);
+
     if (!window.WebGL2RenderingContext && !window.WebGLRenderingContext) {
         console.error(`WebGL not supported by the browser - userAgent: ${navigator.userAgent}`);
         setIsWebglNotSupported(true);
@@ -71,10 +76,10 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>
                 <GlobalReset />
-                <GlobalStyle $hideCanvas={showSplashscreen || isShuttingDown} />
+                <GlobalStyle $hideCanvas={delayedSplash || isShuttingDown} />
                 <LazyMotion features={domAnimation} strict>
                     <FloatingElements />
-                    <CurrentAppSection showSplashscreen={showSplashscreen} isShuttingDown={isShuttingDown} />
+                    <CurrentAppSection showSplashscreen={delayedSplash} isShuttingDown={isShuttingDown} />
                     <canvas id={TOWER_CANVAS_ID} />
                 </LazyMotion>
             </ThemeProvider>
